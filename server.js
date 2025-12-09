@@ -25,13 +25,17 @@ app.use(express.static('.')); // Serve static files
 const EXCEL_FILE_PATH = path.join(__dirname, 'customer_inquiries.xlsx');
 
 // Google Sheets configuration
+// Option 1: Google Apps Script Web App URL (easier, no service account needed)
+const GOOGLE_APPS_SCRIPT_URL = process.env.GOOGLE_APPS_SCRIPT_URL || '';
+
+// Option 2: Direct Google Sheets API (requires service account)
 const SPREADSHEET_ID = process.env.GOOGLE_SHEET_ID || '';
 const SHEET_NAME = process.env.GOOGLE_SHEET_NAME || 'Inquiries';
 
-// Initialize Google Sheets client
+// Initialize Google Sheets client (for direct API method)
 async function getGoogleSheetsClient() {
   try {
-    // Option 1: Using Service Account (Recommended for server-side)
+    // Using Service Account
     if (process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL && process.env.GOOGLE_PRIVATE_KEY) {
       const auth = new google.auth.JWT(
         process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
@@ -39,15 +43,6 @@ async function getGoogleSheetsClient() {
         process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
         ['https://www.googleapis.com/auth/spreadsheets']
       );
-      return google.sheets({ version: 'v4', auth });
-    }
-    
-    // Option 2: Using API Key (if sheet is public)
-    if (process.env.GOOGLE_API_KEY) {
-      const auth = new google.auth.GoogleAuth({
-        keyFile: process.env.GOOGLE_SERVICE_ACCOUNT_KEY_FILE,
-        scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-      });
       return google.sheets({ version: 'v4', auth });
     }
     
@@ -103,21 +98,39 @@ function addToExcel(data) {
   console.log('Data added to Excel file:', newRow);
 }
 
-// Add data to Google Sheets
+// Add data to Google Sheets (supports both Apps Script and direct API)
 async function addToGoogleSheets(data) {
+  // Method 1: Google Apps Script Web App (easier, no service account needed)
+  if (GOOGLE_APPS_SCRIPT_URL) {
+    try {
+      const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      const result = await response.json();
+      if (result.success) {
+        console.log('Data added to Google Sheet via Apps Script');
+        return true;
+      }
+    } catch (error) {
+      console.error('Error with Google Apps Script:', error);
+    }
+  }
+
+  // Method 2: Direct Google Sheets API (requires service account)
   try {
     if (!SPREADSHEET_ID) {
-      console.log('Google Sheet ID not configured. Skipping Google Sheets update.');
+      console.log('Google Sheets not configured. Skipping.');
       return false;
     }
 
     const sheets = await getGoogleSheetsClient();
     if (!sheets) {
-      console.log('Google Sheets client not initialized. Skipping Google Sheets update.');
+      console.log('Google Sheets client not initialized. Skipping.');
       return false;
     }
 
-    // Prepare the row data
     const rowData = [
       new Date().toISOString(),
       data.name || '',
@@ -127,48 +140,15 @@ async function addToGoogleSheets(data) {
       data.message || ''
     ];
 
-    // Check if headers exist, if not, add them
-    try {
-      const headerResponse = await sheets.spreadsheets.values.get({
-        spreadsheetId: SPREADSHEET_ID,
-        range: `${SHEET_NAME}!A1:F1`,
-      });
-
-      // If no headers exist, add them
-      if (!headerResponse.data.values || headerResponse.data.values.length === 0) {
-        await sheets.spreadsheets.values.append({
-          spreadsheetId: SPREADSHEET_ID,
-          range: `${SHEET_NAME}!A1`,
-          valueInputOption: 'USER_ENTERED',
-          resource: {
-            values: [['Date', 'Name', 'Email', 'Phone', 'Service', 'Message']]
-          }
-        });
-      }
-    } catch (error) {
-      // If sheet doesn't exist, create headers
-      console.log('Creating headers in Google Sheet...');
-      await sheets.spreadsheets.values.append({
-        spreadsheetId: SPREADSHEET_ID,
-        range: `${SHEET_NAME}!A1`,
-        valueInputOption: 'USER_ENTERED',
-        resource: {
-          values: [['Date', 'Name', 'Email', 'Phone', 'Service', 'Message']]
-        }
-      });
-    }
-
     // Append the new row
     await sheets.spreadsheets.values.append({
       spreadsheetId: SPREADSHEET_ID,
       range: `${SHEET_NAME}!A:F`,
       valueInputOption: 'USER_ENTERED',
-      resource: {
-        values: [rowData]
-      }
+      resource: { values: [rowData] }
     });
 
-    console.log('Data added to Google Sheet:', rowData);
+    console.log('Data added to Google Sheet via API:', rowData);
     return true;
   } catch (error) {
     console.error('Error adding data to Google Sheets:', error);
