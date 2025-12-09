@@ -1,0 +1,35 @@
+# Render Blueprint - Deploy with one click
+# https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: unirath-infotech
+    env: node
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      # Email Configuration (set these in Render dashboard)
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: NOTIFICATION_EMAIL
+        sync: false
+      # Google Sheets Configuration (optional - set in Render dashboard)
+      - key: GOOGLE_SHEET_ID
+        sync: false
+      - key: GOOGLE_SHEET_NAME
+        sync: false
+      - key: GOOGLE_SERVICE_ACCOUNT_EMAIL
+        sync: false
+      - key: GOOGLE_PRIVATE_KEY
+        sync: false
+

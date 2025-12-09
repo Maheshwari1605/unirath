@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - UNIRATH INFOTECH</title>
+
+  <!-- 
+    - favicon
+  -->
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+  <!-- 
+    - custom css link
+  -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <!-- 
+    - google font link
+  -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Source+Sans+Pro:wght@600;700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body id="top">
+
+  <!-- 
+    - #HEADER
+  -->
+
+  <header class="header" data-header>
+    <div class="container">
+
+      <div class="overlay" data-overlay></div>
+
+      <a href="index.html" class="logo-wrapper">
+        <img src="./assets/images/logo.png" alt="UNIRATH INFOTECH" class="logo-img">
+        <div class="logo-text">
+          <span class="logo-name">UNIRATH INFOTECH</span>
+          <span class="logo-tagline">ELEVATE.EXCEL.EMPOWER</span>
+        </div>
+      </a>
+
+      <nav class="navbar" data-navbar>
+
+        <div class="navbar-top">
+          <a href="index.html" class="logo-wrapper">
+            <img src="./assets/images/logo.png" alt="UNIRATH INFOTECH" class="logo-img">
+            <div class="logo-text">
+              <span class="logo-name">UNIRATH INFOTECH</span>
+              <span class="logo-tagline">ELEVATE.EXCEL.EMPOWER</span>
+            </div>
+          </a>
+
+          <button class="nav-close-btn" aria-label="Close Menu" data-nav-close-btn>
+            <ion-icon name="close-outline"></ion-icon>
+          </button>
+        </div>
+
+        <ul class="navbar-list">
+
+          <li class="navbar-item">
+            <a href="index.html" class="navbar-link" data-navbar-link>Home</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="about.html" class="navbar-link" data-navbar-link>About</a>
+          </li>
+
+          <li class="navbar-item dropdown">
+            <a href="services.html" class="navbar-link dropdown-toggle" data-navbar-link data-dropdown-toggle>
+              Services
+              <ion-icon name="chevron-down-outline" class="dropdown-icon"></ion-icon>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="rcm.html" class="dropdown-link">Revenue Cycle Management</a></li>
+              <li><a href="medical-records.html" class="dropdown-link">Medical Record Retrieval</a></li>
+              <li><a href="customer-support.html" class="dropdown-link">Customer Support Services</a></li>
+              <li><a href="back-office.html" class="dropdown-link">Back-Office & Administrative Support</a></li>
+              <li><a href="it-automation.html" class="dropdown-link">IT & Automation Services</a></li>
+            </ul>
+          </li>
+
+          <li class="navbar-item">
+            <a href="contact.html" class="navbar-link" data-navbar-link>Contact Us</a>
+          </li>
+
+        </ul>
+
+      </nav>
+
+      <a href="contact.html" class="btn">
+        <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon>
+
+        <span>Get A Quote</span>
+      </a>
+
+      <button class="nav-open-btn" aria-label="Open Menu" data-nav-open-btn>
+        <ion-icon name="menu-outline"></ion-icon>
+      </button>
+
+    </div>
+  </header>
+
+
+
+
+  <main>
+    <article>
+
+      <!-- 
+        - #CONTACT
+      -->
+
+      <section class="section contact" id="contact" style="padding-block-start: 120px;">
+        <div class="container">
+
+          <h2 class="h2 section-title underline">Contact Us</h2>
+
+          <div class="contact-wrapper">
+            <div class="contact-content">
+              <h3 class="h3 contact-title">Get In Touch</h3>
+              <p class="contact-text">
+                Ready to streamline your operations and reduce costs? Contact us today to discuss how we can help your business grow.
+              </p>
+
+              <ul class="contact-list">
+                <li class="contact-item">
+                  <div class="contact-item-icon">
+                    <ion-icon name="call"></ion-icon>
+                  </div>
+                  <div>
+                    <p class="contact-item-title">Phone</p>
+                    <a href="tel:+911234567890" class="contact-item-link">+91-123-456-7890</a>
+                    <a href="tel:+911234567891" class="contact-item-link">+91-123-456-7891</a>
+                  </div>
+                </li>
+
+                <li class="contact-item">
+                  <div class="contact-item-icon">
+                    <ion-icon name="mail"></ion-icon>
+                  </div>
+                  <div>
+                    <p class="contact-item-title">Email</p>
+                    <a href="mailto:info@unirathinfo.com" class="contact-item-link">info@unirathinfo.com</a>
+                    <a href="mailto:support@unirathinfo.com" class="contact-item-link">support@unirathinfo.com</a>
+                  </div>
+                </li>
+
+                <li class="contact-item">
+                  <div class="contact-item-icon">
+                    <ion-icon name="location"></ion-icon>
+                  </div>
+                  <div>
+                    <p class="contact-item-title">Location</p>
+                    <address class="contact-item-link">B-524, The Landmark, Kudasan, Gandhinagar, Gujarat 382419</address>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <form action="" class="contact-form" id="contactForm">
+              <div id="formMessage" class="form-message" style="display: none;"></div>
+              
+              <div class="form-group">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" name="name" id="name" class="form-input" placeholder="Your Name" required>
+              </div>
+
+              <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" id="email" class="form-input" placeholder="your.email@example.com" required>
+              </div>
+
+              <div class="form-group">
+                <label for="phone" class="form-label">Phone</label>
+                <input type="tel" name="phone" id="phone" class="form-input" placeholder="+1 (555) 123-4567">
+              </div>
+
+              <div class="form-group">
+                <label for="service" class="form-label">Service Interested In</label>
+                <select name="service" id="service" class="form-input">
+                  <option value="">Select a service</option>
+                  <option value="Revenue Cycle Management (RCM)">Revenue Cycle Management (RCM)</option>
+                  <option value="Medical Record Retrieval">Medical Record Retrieval</option>
+                  <option value="Customer Support Services">Customer Support Services</option>
+                  <option value="Back-Office & Administrative Support">Back-Office & Administrative Support</option>
+                  <option value="IT & Automation Services">IT & Automation Services</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="message" class="form-label">Message</label>
+                <textarea name="message" id="message" class="form-input" rows="5" placeholder="Tell us about your requirements..." required></textarea>
+              </div>
+
+              <button type="submit" class="btn" id="submitBtn">Send Message</button>
+            </form>
+          </div>
+
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+
+
+
+  <!-- 
+    - #FOOTER
+  -->
+
+  <footer class="footer">
+
+    <div class="footer-top section">
+      <div class="container">
+
+        <div class="footer-brand">
+
+          <a href="index.html" class="logo-wrapper">
+            <img src="./assets/images/logo.png" alt="UNIRATH INFOTECH" class="logo-img">
+            <div class="logo-text">
+              <span class="logo-name">UNIRATH INFOTECH</span>
+              <span class="logo-tagline">ELEVATE.EXCEL.EMPOWER</span>
+            </div>
+          </a>
+
+          <p class="text">
+            Delivering Efficiency, Accuracy & Growth for US and International Businesses. Professional outsourcing and process management powered from India.
+          </p>
+
+          <ul class="social-list">
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-facebook"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-instagram"></ion-icon>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="social-link">
+                <ion-icon name="logo-twitter"></ion-icon>
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="footer-list-title">Our links</p>
+          </li>
+
+          <li>
+            <a href="index.html" class="footer-link">Home</a>
+          </li>
+
+          <li>
+            <a href="about.html" class="footer-link">About Us</a>
+          </li>
+
+          <li>
+            <a href="services.html" class="footer-link">Services</a>
+          </li>
+
+          <li>
+            <a href="contact.html" class="footer-link">Contact Us</a>
+          </li>
+
+        </ul>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="footer-list-title">Our Services</p>
+          </li>
+
+          <li>
+            <a href="rcm.html" class="footer-link">Revenue Cycle Management</a>
+          </li>
+
+          <li>
+            <a href="medical-records.html" class="footer-link">Medical Record Retrieval</a>
+          </li>
+
+          <li>
+            <a href="customer-support.html" class="footer-link">Customer Support</a>
+          </li>
+
+          <li>
+            <a href="back-office.html" class="footer-link">Back-Office Support</a>
+          </li>
+
+          <li>
+            <a href="it-automation.html" class="footer-link">IT & Automation</a>
+          </li>
+
+        </ul>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="footer-list-title">Other links</p>
+          </li>
+
+          <li>
+            <a href="about.html#faq" class="footer-link">FAQ</a>
+          </li>
+
+          <li>
+            <a href="about.html" class="footer-link">About Us</a>
+          </li>
+
+          <li>
+            <a href="contact.html" class="footer-link">Support</a>
+          </li>
+
+        </ul>
+
+        <ul class="footer-list">
+
+          <li>
+            <p class="footer-list-title">Contact Us</p>
+          </li>
+
+          <li class="footer-item">
+
+            <div class="footer-item-icon">
+              <ion-icon name="call"></ion-icon>
+            </div>
+
+            <div>
+              <a href="tel:+911234567890" class="footer-item-link">+91-123-456-7890</a>
+              <a href="tel:+911234567891" class="footer-item-link">+91-123-456-7891</a>
+            </div>
+
+          </li>
+
+          <li class="footer-item">
+
+            <div class="footer-item-icon">
+              <ion-icon name="mail"></ion-icon>
+            </div>
+
+            <div>
+              <a href="mailto:info@unirathinfo.com" class="footer-item-link">info@unirathinfo.com</a>
+              <a href="mailto:support@unirathinfo.com" class="footer-item-link">support@unirathinfo.com</a>
+            </div>
+
+          </li>
+
+          <li class="footer-item">
+
+            <div class="footer-item-icon">
+              <ion-icon name="location"></ion-icon>
+            </div>
+
+            <address class="footer-item-link">
+              B-524, The Landmark, Kudasan, Gandhinagar, Gujarat 382419
+            </address>
+
+          </li>
+
+        </ul>
+
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="copyright">
+        &copy; 2024 <a href="index.html" class="copyright-link">UNIRATH INFOTECH</a>. All Rights Reserved
+      </p>
+      <div class="footer-bottom-links">
+        <a href="privacy-policy.html" class="footer-bottom-link">Privacy Policy</a>
+        <span class="footer-separator">|</span>
+        <a href="#" class="footer-bottom-link">Terms & Conditions</a>
+      </div>
+    </div>
+
+  </footer>
+
+
+
+
+  <!-- 
+    - #GO TO TOP
+  -->
+
+  <a href="#top" class="go-top  active" aria-label="Go To Top" data-go-top>
+    <ion-icon name="arrow-up-outline"></ion-icon>
+  </a>
+
+
+
+
+  <!-- 
+    - custom js link
+  -->
+  <script src="./assets/js/script.js"></script>
+
+  <!-- 
+    - ionicon link
+  -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>
+
