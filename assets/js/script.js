@@ -232,13 +232,20 @@ if (contactForm) {
       
       console.log('Submitting to:', apiUrl);
       
+      // Create abort controller for timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+      
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
+        signal: controller.signal
       });
+      
+      clearTimeout(timeoutId);
       
       // Check if response is ok
       if (!response.ok) {
@@ -256,8 +263,8 @@ if (contactForm) {
     } catch (error) {
       console.error('Error submitting form:', error);
       
-      // If server is not available, offer mailto fallback
-      if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError') || error.message.includes('Server not available')) {
+      // If server is not available or timeout, offer mailto fallback
+      if (error.name === 'AbortError' || error.message.includes('Failed to fetch') || error.message.includes('NetworkError') || error.message.includes('Server not available')) {
         // Create mailto link as fallback
         const subject = encodeURIComponent('Contact Inquiry - UNIRATH INFOTECH');
         const body = encodeURIComponent(

@@ -222,20 +222,30 @@ app.post('/api/contact', async (req, res) => {
       message: message.trim()
     };
     
-    // Save to Excel
+    // Save to Excel immediately (this is fast)
     addToExcel(formData);
     
-    // Save to Google Sheets
-    const googleSheetsResult = await addToGoogleSheets(formData);
-    
-    // Send email notification
-    const emailResult = await sendEmailNotification(formData);
-    
+    // Send success response immediately - don't wait for email/Google Sheets
     res.json({
       success: true,
-      message: 'Thank you for your inquiry! We will get back to you soon.',
-      emailSent: emailResult.success,
-      googleSheetsUpdated: googleSheetsResult
+      message: 'Thank you for your inquiry! We will get back to you soon.'
+    });
+    
+    // Process email and Google Sheets in background (non-blocking)
+    setImmediate(async () => {
+      try {
+        // Save to Google Sheets
+        await addToGoogleSheets(formData);
+      } catch (error) {
+        console.error('Background Google Sheets error:', error.message);
+      }
+      
+      try {
+        // Send email notification
+        await sendEmailNotification(formData);
+      } catch (error) {
+        console.error('Background email error:', error.message);
+      }
     });
     
   } catch (error) {
